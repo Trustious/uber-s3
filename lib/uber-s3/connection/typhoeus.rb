@@ -1,6 +1,6 @@
 require 'typhoeus'
 
-HYDRA = ::Typhoeus::Hydra.new
+HYDRA = ::Typhoeus::Hydra.new(:max_concurrency => 100)
 
 module UberS3::Connection
   class Typhoeus < Adapter
@@ -13,14 +13,21 @@ module UberS3::Connection
       params[:body] = body if body
 
       r = ::Typhoeus::Request.new(url, params)
+      result = r.on_complete do |response|
+          puts 'INSIDE callback'
+          UberS3::Response.new({
+              :status => response.code,
+              :header => response.headers,
+              :body   => response.body,
+              :raw    => response
+          })
+      end
       HYDRA.queue(r)
-      HYDRA.run
-
       UberS3::Response.new({
-        :status => r.response.code,
-        :header => r.response.headers,
-        :body   => r.response.body,
-        :raw    => r.response
+          :status => 200,
+          :header => "",
+          :body   => "",
+          :raw    => ""
       })
     end
     
