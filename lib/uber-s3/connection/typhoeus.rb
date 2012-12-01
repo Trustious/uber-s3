@@ -13,14 +13,15 @@ module UberS3::Connection
       params[:body] = body if body
 
       r = ::Typhoeus::Request.new(url, params)
-      result = r.on_complete do |response|
-          puts 'INSIDE callback'
-          UberS3::Response.new({
+      r.on_complete do |response|
+          result = UberS3::Response.new({
               :status => response.code,
               :header => response.headers,
               :body   => response.body,
               :raw    => response
           })
+          puts '#'*50, 'error handling request', url, params, result.inspect unless status < 400
+          result
       end
       HYDRA.queue(r)
       UberS3::Response.new({
