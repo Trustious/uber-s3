@@ -12,3 +12,5 @@ group :development, :test do
   
   # gem 'nokogiri'
 end
+
+gem 'typhoeus', '~> 0.4.2'

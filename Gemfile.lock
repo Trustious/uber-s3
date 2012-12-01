@@ -19,7 +19,7 @@ GIT
 PATH
   remote: .
   specs:
-    uber-s3 (0.2.3)
+    uber-s3 (0.2.4)
       mime-types (~> 1.17)
 
 GEM
@@ -33,6 +33,7 @@ GEM
       eventmachine (>= 1.0.0.beta.4)
     eventmachine (1.0.0.beta.4)
     eventmachine (1.0.0.beta.4-java)
+    ffi (1.1.5)
     http_parser.rb (0.5.3)
     http_parser.rb (0.5.3-java)
     method_source (0.7.1)
@@ -59,6 +60,9 @@ GEM
     rspec-mocks (2.7.0)
     slop (2.4.4)
     spoon (0.0.1)
+    typhoeus (0.4.2)
+      ffi (~> 1.0)
+      mime-types (~> 1.18)
 
 PLATFORMS
   java
@@ -72,4 +76,5 @@ DEPENDENCIES
   pry-nav
   rake
   rspec (~> 2.7.0)
+  typhoeus (~> 0.4.2)
   uber-s3!
