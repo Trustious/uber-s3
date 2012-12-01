@@ -20,7 +20,7 @@ module UberS3::Connection
               :body   => response.body,
               :raw    => response
           })
-          puts '#'*50, 'error handling request', url, params, result.inspect unless status < 400
+          puts '#'*50, 'error handling request', url, params, result.inspect unless response.status < 400
           result
       end
       HYDRA.queue(r)
