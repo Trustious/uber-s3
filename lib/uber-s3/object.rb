@@ -8,6 +8,7 @@ class UberS3
     include Operation::Object::HttpCache
     include Operation::Object::Meta
     include Operation::Object::StorageClass
+    include Operation::Object::Date
 
     attr_accessor :bucket, :key, :response, :value, :size, :error
     
@@ -63,6 +64,7 @@ class UberS3
       headers['Cache-Control']        = cache_control
       headers['Expires']              = expires
       headers['Pragma']               = pragma
+      headers['Date']                 = date
 
       headers.each {|k,v| headers.delete(k) if v.nil? || v.empty? }
 
